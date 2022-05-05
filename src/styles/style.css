@@ -6,3 +6,9 @@ body {
   background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
   min-height: 100%;
 }
+.active{
+  color: #9ec0db;
+}
+.key:active{
+  color: #9ec0db;
+}

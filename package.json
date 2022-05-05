@@ -1,7 +1,7 @@
 {
   "name": "virtual-keyboard",
   "version": "1.0.0",
-  "description": "My webpack project",
+  "description": "virtual-keyboard",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,10 +10,8 @@
     "watch": "webpack --watch",
     "serve": "webpack serve"
   },
-
   "author": "Max Rybakov",
   "license": "ISC",
-
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
@@ -23,10 +21,12 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.6.0",
-    "eslint": "^8.10.0",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
