@@ -1,9 +1,8 @@
-import { ARRAY_KEYS } from '../constants';
+import { ARRAY_KEYS } from './constants';
 import { KEYBOARD_TEMPLATE } from './keyboard.template';
 
 export class Keyboard {
   constructor() {
-    this.body = document.querySelector('body');
     this.properties = {
       capsLock: false,
       en: false,
@@ -14,7 +13,7 @@ export class Keyboard {
   }
 
   init() {
-    this.body.insertAdjacentHTML('beforeend', KEYBOARD_TEMPLATE);
+    document.querySelector('body').insertAdjacentHTML('beforeend', KEYBOARD_TEMPLATE);
   }
 
   initKeyboard(languageKeyboard) {
@@ -31,14 +30,14 @@ export class Keyboard {
     const fragment = document.createDocumentFragment();
     this.keyLayout.forEach((key) => {
       const keyElement = document.createElement('button');
-      const insertLineBreak = ['Backspace', 'Delete', 'Enter', 'ShiftRight'].indexOf(key[4]) !== -1;
+      const rightBorder = ['Backspace', 'Delete', 'Enter', 'ShiftRight'].indexOf(key[4]) !== -1;
       keyElement.setAttribute('type', 'button');
       keyElement.classList.add('key');
       keyElement.setAttribute('data-key', `${key[4]}`);
 
       switch (key[4]) {
         case 'Backspace':
-          keyElement.classList.add('key-big');
+          keyElement.classList.add('key-little-big');
           keyElement.innerHTML = 'Backspace';
           keyElement.addEventListener('click', (event) => {
             this.deleteText(1, 0, 1);
@@ -46,15 +45,15 @@ export class Keyboard {
 
           break;
         case 'Delete':
-          keyElement.classList.add('key-big');
-          keyElement.innerHTML = 'Delete';
+          keyElement.classList.add('key-small');
+          keyElement.innerHTML = 'Del';
           keyElement.addEventListener('click', (event) => {
             this.deleteText(0, 1, 0);
           });
           break;
 
         case 'Tab':
-          keyElement.classList.add('key-big');
+          keyElement.classList.add('key-small');
           keyElement.innerHTML = 'Tab';
           keyElement.addEventListener('click', (event) => {
             this.insertText('\t');
@@ -135,13 +134,13 @@ export class Keyboard {
           break;
 
         case 'ControlLeft':
-          keyElement.classList.add('key-big');
-          keyElement.innerHTML = 'Control';
+          keyElement.classList.add('key-small');
+          keyElement.innerHTML = 'Ctrl';
           break;
 
         case 'ControlRight':
-          keyElement.classList.add('key-big');
-          keyElement.innerHTML = 'Control';
+          keyElement.classList.add('key-small');
+          keyElement.innerHTML = 'Ctrl';
           break;
 
         case 'AltRight':
@@ -167,7 +166,7 @@ export class Keyboard {
 
         case 'Space':
           keyElement.classList.add('key-huge');
-          keyElement.innerHTML = ' ';
+          keyElement.innerHTML = 'Space';
           keyElement.addEventListener('click', (event) => {
             this.insertText(' ');
           });
@@ -182,7 +181,7 @@ export class Keyboard {
         }
       }
       fragment.append(keyElement);
-      if (insertLineBreak) {
+      if (rightBorder) {
         fragment.append(document.createElement('br'));
       }
     });
@@ -191,7 +190,7 @@ export class Keyboard {
   }
 
   insertText(text) {
-    const textarea = document.querySelector('.use-keyboard-input');
+    const textarea = document.querySelector('.input-keyboard');
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const findText = textarea.value.substring(0, start) + text + textarea.value.substring(end);
@@ -201,7 +200,7 @@ export class Keyboard {
   }
 
   deleteText(num1, num2, num3) {
-    const textarea = document.querySelector('.use-keyboard-input');
+    const textarea = document.querySelector('.input-keyboard');
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const findText = textarea.value.substring(0, start - num1) + textarea.value.substring(end + num2);
@@ -213,7 +212,12 @@ export class Keyboard {
   toggleCapsLock() {
     this.properties.capsLock = !this.properties.capsLock;
     document.querySelectorAll('.key').forEach((key) => {
-      if (!key.classList.contains('key-big') && !key.classList.contains('key-huge')) {
+      if (
+        !key.classList.contains('key-big') &&
+        !key.classList.contains('key-little-big') &&
+        !key.classList.contains('key-huge') &&
+        !key.classList.contains('key-small')
+      ) {
         if (this.properties.capsLock) {
           key.innerHTML = key.innerHTML.toUpperCase();
         } else {
@@ -222,7 +226,7 @@ export class Keyboard {
       }
     });
   }
-  
+
   realKeyboard() {
     document.addEventListener('keydown', (event) => {
       const key = document.querySelector(`button[data-key='${event.code}']`);

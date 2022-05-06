@@ -3,12 +3,69 @@
 body {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
   min-height: 100%;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
 }
-.active{
-  color: #9ec0db;
+.title {
+  font-size: 35px;
+  text-align: center;
+  font-weight: 900;
+  color: #6d3bc8;
+}
+.input-keyboard {
+  width: 700px;
+  height: 200px;
+  padding: 15px;
+  outline: none;
+  font-size: 20px;
+}
+.keyboard {
+  margin: 20px 0 20px;
+  width: 730px;
+  border: solid;
+  border: solid 2px #598c7c;
+  background: #7f648e;
+  border-radius: 10px;
+}
+.keyboard-keys {
+  padding: 5px;
+}
+.key {
+  font-size: 17px;
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background: #344131;
+  cursor: pointer;
 }
 .key:active{
-  color: #9ec0db;
+  background: #3eb7a8;
+    border-radius: 10px;
+}
+.active{
+  background: #3eb7a8;
+    border-radius: 10px;
+}
+
+.key-big {
+  width: 100px;
+}
+.key-little-big {
+  width: 114px;
+}
+.key-small {
+  width: 54px;
+}
+.key-huge {
+  width: 242px;
+}
+.change-lang{
+  margin: 0 0 10px;
+  color: #6d3bc8;
+  font-weight:bold
 }
