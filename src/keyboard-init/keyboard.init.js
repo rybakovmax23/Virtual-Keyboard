@@ -295,9 +295,6 @@ export class Keyboard {
 
     document.addEventListener('keyup', (event) => {
       const key = document.querySelector(`button[data-key='${event.code}']`);
-      if (event.code === 'CapsLock') {
-        this.toggleCapsLock();
-      }
       if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
         document.querySelector('.keyboard-keys').innerHTML = '';
         if (!this.properties.en) {
