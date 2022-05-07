@@ -175,7 +175,7 @@ export class Keyboard {
         default: {
           keyElement.innerHTML = key[`${count}`];
           keyElement.addEventListener('click', (event) => {
-            this.insertText(event.target.innerHTML);
+            this.insertText(event.target.innerText)
           });
           break;
         }
@@ -246,8 +246,8 @@ export class Keyboard {
 
         case 'CapsLock':
           this.toggleCapsLock();
-          key.classList.toggle('active');
-          break;
+          key.classList.add('active');
+          return;
 
         case 'Enter':
           this.insertText('\n');
@@ -286,7 +286,7 @@ export class Keyboard {
           break;
 
         default:
-          this.insertText(key.innerHTML);
+          this.insertText(key.innerText);
           break;
       }
 
@@ -314,14 +314,11 @@ export class Keyboard {
 
       document.addEventListener('keydown', (event) => {
         pressed.add(event.code);
-
-        // Are all keys from the set pressed?
         for (let i = 0; i < codes.length; i += 1) {
           if (!pressed.has(codes[i])) {
             return;
           }
         }
-
         pressed.clear();
         func();
       });
